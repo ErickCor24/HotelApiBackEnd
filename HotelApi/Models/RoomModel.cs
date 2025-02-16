@@ -1,28 +1,21 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HotelApi.Models
 {
     public class RoomModel
     {
         [Key]
-        public int IdRoom { get; set; } = 0 ;
+        public int IdRoom { get; set; }
+
+        [ForeignKey("RoomType")]
+        public int RoomTypeId { get; set; }
+
+        public RoomTypeModel? RoomType { get; set; }
 
         [Required]
-        public RoomTypeModel? RoomType { get; set; } = null;
+        public int Status { get; set; }
 
-        [Required]
-        public int Status { get; set; } = 1;
-
-        public RoomModel()
-        {
-        }
-
-        public RoomModel(int idRoom, RoomTypeModel roomType, int status = 1)
-        {
-            this.IdRoom = idRoom;
-            this.RoomType = roomType;
-            this.Status = status;
-        }
     }
 }

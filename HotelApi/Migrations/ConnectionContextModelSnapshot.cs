@@ -135,7 +135,7 @@ namespace HotelApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdRoom"));
 
-                    b.Property<int>("RoomTypeIdRoomType")
+                    b.Property<int>("RoomTypeId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -143,7 +143,7 @@ namespace HotelApi.Migrations
 
                     b.HasKey("IdRoom");
 
-                    b.HasIndex("RoomTypeIdRoomType");
+                    b.HasIndex("RoomTypeId");
 
                     b.ToTable("Rooms");
                 });
@@ -202,7 +202,7 @@ namespace HotelApi.Migrations
                 {
                     b.HasOne("HotelApi.Models.RoomTypeModel", "RoomType")
                         .WithMany()
-                        .HasForeignKey("RoomTypeIdRoomType")
+                        .HasForeignKey("RoomTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

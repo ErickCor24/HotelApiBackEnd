@@ -60,8 +60,8 @@ namespace HotelApi.Controllers
             try
             {
                 var employee = employeeService.GetEmployee(authentication);
-                if (employee == null) throw new Exception("User don't found");
-                response = new ResponseDTO(true, string.Empty, employee);
+                if (employee == null) throw new Exception("User account don't found");
+                response = new ResponseDTO(true, "Employee account found", employee);
                 return new JsonResult(response);
             }
             catch (Exception ex)

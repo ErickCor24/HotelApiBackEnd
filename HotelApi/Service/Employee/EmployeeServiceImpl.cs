@@ -15,10 +15,13 @@ namespace HotelApi.Service.Employee
     {
         private readonly DBContext _context;
 
+        /*CONSTRUCTOR*/
         public EmployeeServiceImpl(DBContext context)
         {
             _context = context;
         }
+
+
         public IEnumerable<EmployeeModel> GetAllEmployees()
         {
             var employees = _context.Employees.ToList();

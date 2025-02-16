@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using HotelApi.Service.Customer;
 using HotelApi.Service.Employee;
+using HotelApi.Service.Room;
+using HotelApi.Service.RoomType;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,8 @@ builder.Services.AddDbContext<DBContext>(options => options.UseSqlServer(CONNECT
 // Add service layer
 builder.Services.AddScoped<ICustomerService, CustomerServiceImpl>();
 builder.Services.AddScoped<IEmployeeService, EmployeeServiceImpl>();
+builder.Services.AddScoped<IRoomService, RoomServiceImpl>();
+builder.Services.AddScoped<IRoomTypeService, RoomTypeServiceImpl>();
 
 // Add services to the container.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
