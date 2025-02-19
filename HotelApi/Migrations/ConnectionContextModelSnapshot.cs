@@ -112,17 +112,20 @@ namespace HotelApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdReservation"));
 
-                    b.Property<int>("RoomIdRoom")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("customerIdCustomer")
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("IdReservation");
 
-                    b.HasIndex("RoomIdRoom");
+                    b.HasIndex("CustomerId");
 
-                    b.HasIndex("customerIdCustomer");
+                    b.HasIndex("RoomId");
 
                     b.ToTable("Reservations");
                 });
@@ -181,21 +184,21 @@ namespace HotelApi.Migrations
 
             modelBuilder.Entity("HotelApi.Models.ReservationModel", b =>
                 {
+                    b.HasOne("HotelApi.Models.CustomerModel", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("HotelApi.Models.RoomModel", "Room")
                         .WithMany()
-                        .HasForeignKey("RoomIdRoom")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelApi.Models.CustomerModel", "customer")
-                        .WithMany()
-                        .HasForeignKey("customerIdCustomer")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Customer");
 
                     b.Navigation("Room");
-
-                    b.Navigation("customer");
                 });
 
             modelBuilder.Entity("HotelApi.Models.RoomModel", b =>

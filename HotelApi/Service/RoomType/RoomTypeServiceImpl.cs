@@ -30,5 +30,19 @@ namespace HotelApi.Service.RoomType
                 return false;
             }
         }
+        public bool EditRoomTypeById(int id, RoomTypeModel roomType)
+        {
+            roomType.IdRoomType = id;
+            try
+            {
+                _context.RoomsType.Update(roomType);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

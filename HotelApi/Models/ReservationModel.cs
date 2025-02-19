@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HotelApi.Models
 {
@@ -7,21 +8,19 @@ namespace HotelApi.Models
         [Key]
         public int IdReservation { get; set; } = 0;
 
-        [Required]
-        public CustomerModel? customer { get; set; } = null;
+
+        [ForeignKey("Customer")]
+        public int CustomerId { get; set; }
+
+        public CustomerModel? Customer { get; set; }
+
+
+        [ForeignKey("Room")]
+        public int RoomId { get; set; }
+        public RoomModel? Room { get; set; }
 
         [Required]
-        public RoomModel? Room { get; set; } = null ;
+        public int Status { get; set; }
 
-        public ReservationModel()
-        {
-        }
-
-        public ReservationModel(int idReservation, CustomerModel customer, RoomModel room)
-        {
-            this.IdReservation = idReservation;
-            this.customer = customer;
-            this.Room = room;
-        }
     }
 }

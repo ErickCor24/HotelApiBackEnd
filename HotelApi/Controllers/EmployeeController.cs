@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HotelApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class EmployeeController : ControllerBase
     {
@@ -36,7 +36,7 @@ namespace HotelApi.Controllers
             }
         }
 
-        [HttpPost("[action]")]
+        [HttpPost]
         public JsonResult InsertEmploye([FromBody] EmployeeModel employee)
         {
             ResponseDTO response ;

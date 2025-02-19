@@ -8,6 +8,7 @@ using HotelApi.Service.Customer;
 using HotelApi.Service.Employee;
 using HotelApi.Service.Room;
 using HotelApi.Service.RoomType;
+using HotelApi.Service.Reservation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ builder.Services.AddScoped<ICustomerService, CustomerServiceImpl>();
 builder.Services.AddScoped<IEmployeeService, EmployeeServiceImpl>();
 builder.Services.AddScoped<IRoomService, RoomServiceImpl>();
 builder.Services.AddScoped<IRoomTypeService, RoomTypeServiceImpl>();
+builder.Services.AddScoped<IReservationService, ReservationServiceImpl>();
 
 // Add services to the container.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

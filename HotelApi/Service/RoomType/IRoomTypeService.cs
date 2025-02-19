@@ -7,5 +7,6 @@ namespace HotelApi.Service.RoomType
         bool InsertNewRoomType(RoomTypeModel roomType);
 
         IEnumerable<RoomTypeModel> GetRoomTypes();
+        bool EditRoomTypeById(int id, RoomTypeModel roomType);
     }
 }

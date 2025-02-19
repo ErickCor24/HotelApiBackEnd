@@ -17,6 +17,7 @@ namespace HotelApi.Service.Room
         {
             RoomModel newRoom = new RoomModel();
             newRoom.RoomTypeId = newRoomType;
+            newRoom.Status = 0;
             try
             {
                 _context.Rooms.Add(newRoom);
@@ -55,7 +56,7 @@ namespace HotelApi.Service.Room
         public RoomModel GetRoomById(int idRoom)
         {
             var room = _context.Rooms.FirstOrDefault(x => x.IdRoom == idRoom);
-            if (room == null)  return null;
+            if (room == null) return null;
             room.RoomType = GetRoomTypeById(room.RoomTypeId);
             return room;
         }
@@ -74,6 +75,20 @@ namespace HotelApi.Service.Room
         {
             _context.Rooms.Update(roomUpdate);
             _context.SaveChanges();
+        }
+
+        public bool CheckRoomStatusById(int RoomId)
+        {
+            try
+            {
+                RoomModel? roomModel = _context.Rooms.Where(x => x.Status == 1).SingleOrDefault(x => x.IdRoom == RoomId);
+                return roomModel == null ? throw new Exception() : true;
+            }
+            catch (Exception)
+            {
+                this.ChangeRoomStatus(RoomId, 1);
+                return false;
+            }
         }
 
         private RoomTypeModel GetRoomTypeById(int roomTypeId)

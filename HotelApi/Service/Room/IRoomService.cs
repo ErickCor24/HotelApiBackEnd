@@ -15,5 +15,7 @@ namespace HotelApi.Service.Room
         bool ChangeRoomStatus(int idRoom, int status);
 
         void UpdateRoomData(RoomModel roomUpdate);
+
+        bool CheckRoomStatusById(int RoomId);
     }
 }
