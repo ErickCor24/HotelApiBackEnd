@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HotelApi.Models
 {
@@ -8,21 +9,16 @@ namespace HotelApi.Models
         [Key]
         public int IdInvoice { get; set; } = 0 ;
 
-        [Required]
-        public ReservationModel? ReservationModel { get; set; } = null;
+        [ForeignKey("Reservation")]
+        public int IdReservation { get; set; }
 
         [Required]
-        public DateTime? CreateDate { get; set; } = DateTime.MinValue;
+        public DateTime CreateDate { get; set; }
 
-        public InvoiceModel()
-        {
-        }
+        public ReservationModel? Reservation { get; set; } 
 
-        public InvoiceModel(int idInvoice, ReservationModel reservationModel)
-        {
-            this.IdInvoice = idInvoice;
-            this.ReservationModel = reservationModel;
-            this.CreateDate = DateTime.UtcNow;
-        }
+        public double Total { get; set; }
+
+
     }
 }

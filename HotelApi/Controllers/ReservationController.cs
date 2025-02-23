@@ -1,5 +1,6 @@
 ﻿using HotelApi.Models;
 using HotelApi.Models.DTO;
+using HotelApi.Service.Invoice;
 using HotelApi.Service.Reservation;
 using HotelApi.Service.Room;
 using Microsoft.AspNetCore.Http;
@@ -14,11 +15,13 @@ namespace HotelApi.Controllers
 
         IReservationService _reservationService;
         IRoomService _roomService;
+        IInvoiceService _invoiceService;
 
-        public ReservationController(IReservationService reservationService, IRoomService roomService)
+        public ReservationController(IReservationService reservationService, IRoomService roomService, IInvoiceService invoiceService)
         {
             _reservationService = reservationService;
             _roomService = roomService;
+            _invoiceService = invoiceService;
         }
 
         [HttpPost]
@@ -30,6 +33,10 @@ namespace HotelApi.Controllers
                 if (_roomService.CheckRoomStatusById(reservation.RoomId)) throw new Exception("Failed to create the new reservation, the room is at use");
                 if (!_reservationService.CreateReservation(reservation)) throw new Exception("Failed to create the new reservation");
                 response = new ResponseDTO(true, "Reservation created successfully", reservation);
+
+                //Create invoice with the reservation generated
+                _invoiceService.CreateInvoice(reservation.IdReservation, reservation.ReservationDays, reservation.Room.RoomType.Price);
+                
                 return new JsonResult(response);
             }
             catch (Exception ex)

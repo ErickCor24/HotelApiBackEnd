@@ -94,12 +94,15 @@ namespace HotelApi.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ReservationModelIdReservation")
+                    b.Property<int>("IdReservation")
                         .HasColumnType("int");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
 
                     b.HasKey("IdInvoice");
 
-                    b.HasIndex("ReservationModelIdReservation");
+                    b.HasIndex("IdReservation");
 
                     b.ToTable("Invoices");
                 });
@@ -113,6 +116,9 @@ namespace HotelApi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdReservation"));
 
                     b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReservationDays")
                         .HasColumnType("int");
 
                     b.Property<int>("RoomId")
@@ -173,13 +179,13 @@ namespace HotelApi.Migrations
 
             modelBuilder.Entity("HotelApi.Models.InvoiceModel", b =>
                 {
-                    b.HasOne("HotelApi.Models.ReservationModel", "ReservationModel")
+                    b.HasOne("HotelApi.Models.ReservationModel", "Reservation")
                         .WithMany()
-                        .HasForeignKey("ReservationModelIdReservation")
+                        .HasForeignKey("IdReservation")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ReservationModel");
+                    b.Navigation("Reservation");
                 });
 
             modelBuilder.Entity("HotelApi.Models.ReservationModel", b =>

@@ -20,6 +20,9 @@ namespace HotelApi.Models
         public RoomModel? Room { get; set; }
 
         [Required]
+        public int ReservationDays { get; set; }
+
+        [Required]
         public int Status { get; set; }
 
     }
