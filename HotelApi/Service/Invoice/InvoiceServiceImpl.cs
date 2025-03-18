@@ -43,5 +43,32 @@ namespace HotelApi.Service.Invoice
             }
         }
 
+        public InvoiceModel GetInvoiceById(int id)
+        {
+            try
+            {
+                var invoice = _context.Invoices.Find(id);
+                invoice.Reservation = _context.Reservations.Find(invoice.IdReservation);
+                invoice.Reservation.Room = _context.Rooms.Find(invoice.Reservation.RoomId);
+                invoice.Reservation.Room.RoomType = _context.RoomsType.Find(invoice.Reservation.Room.RoomTypeId);
+                return invoice;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<InvoiceModel> GetInvoiceByMonth(int month)
+        {
+            try
+            {
+                return _context.Invoices.Where(i => i.CreateDate.Month == month).ToList();
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

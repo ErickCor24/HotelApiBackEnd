@@ -8,5 +8,9 @@ namespace HotelApi.Service.Invoice
         bool CreateInvoice(int idReservation, int days, double price);
 
         IEnumerable<InvoiceModel> GetAllInvoices();
+
+        InvoiceModel GetInvoiceById(int id);
+
+        IEnumerable<InvoiceModel> GetInvoiceByMonth(int month);
     }
 }

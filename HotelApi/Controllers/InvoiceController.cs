@@ -53,5 +53,41 @@ namespace HotelApi.Controllers
             }
         }
 
+
+        [HttpGet]
+        public JsonResult GetInvoiceById(int id)
+        {
+            ResponseDTO response;
+            try
+            {
+                var invoice = _invoiceService.GetInvoiceById(id);
+                if (invoice == null) throw new Exception("Invoice not found");
+                response = new ResponseDTO(true, "Invoice obtained successfully", invoice);
+                return new JsonResult(response);
+            }
+            catch (Exception ex)
+            {
+                response = new ResponseDTO(false, ex.Message, null);
+                return new JsonResult(response);
+            }
+        }
+
+        [HttpGet]
+        public JsonResult GetInvoiceByMonth(int month)
+        {
+            ResponseDTO response;
+            try
+            {
+                var invoices = _invoiceService.GetInvoiceByMonth(month);
+                if (invoices.Count() <= 0) throw new Exception("Don't exist invoices");
+                response = new ResponseDTO(true, "Invoices obtained successfully", invoices);
+                return new JsonResult(response);
+            }
+            catch (Exception ex)
+            {
+                response = new ResponseDTO(false, ex.Message, null);
+                return new JsonResult(response);
+            }
+        }
     }
 }

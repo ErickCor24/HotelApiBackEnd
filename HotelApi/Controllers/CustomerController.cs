@@ -93,5 +93,12 @@ namespace HotelApi.Controllers
             }
         }
 
+
+        [HttpGet]
+        public JsonResult GetCustomerByCi(string ci)
+        {
+            return new JsonResult("Loooool");
+        }
+
     }
 }

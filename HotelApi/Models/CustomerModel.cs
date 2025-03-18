@@ -5,28 +5,23 @@ namespace HotelApi.Models
     public class CustomerModel
     {
         [Key]
-        public int IdCustomer { get; set; } = 0;
+        public int IdCustomer { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string LastName {  get; set; } = string.Empty;
+        public string LastName {  get; set; }
 
         [Required]
         [StringLength(70)]
-        public string Email { get; set; } = string.Empty;
+        public string Email { get; set; }
 
-        public CustomerModel(int idCustomer, string name, string lastName, string email)
-        {
-            this.IdCustomer = idCustomer;
-            this.Name = name;
-            this.LastName = lastName;
-            this.Email = email;
-        }
+        public string Ci { get; set; }
 
-        public CustomerModel() { }
+        public int Age { get; set; }
+
     }
 }
